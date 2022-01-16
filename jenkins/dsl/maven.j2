@@ -3,16 +3,16 @@ job('maven_dsl') {
     description('Maven dsl project')
 
     scm {
-        git('https://github.com/jenkins-docs/simple-java-maven-app', 'master', {node -> node / 'extensions' << '' })
+        git('https://github.com/chethan110/simple-java-maven-app.git', 'master', {node -> node / 'extensions' << '' })
     }
   
     steps {
         maven {
-            mavenInstallation('mvn-jenkins')
+            mavenInstallation('M3')
             goals('-B -DskipTests clean package')
         }
         maven {
-            mavenInstallation('mvn-jenkins')
+            mavenInstallation('M3')
             goals('test')
         }
         shell('''
@@ -24,6 +24,6 @@ job('maven_dsl') {
     publishers {
         archiveArtifacts('target/*.jar')
         archiveJunit('target/surefire-reports/*.xml')
-        mailer('ricardo.andre.gonzalez07@gmail.com', true, true)
+        mailer('chethan110@gmail.com', true, true)
     }
 }
